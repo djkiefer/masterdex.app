@@ -1,0 +1,10 @@
+.header {
+  color: white;
+  background-color: darkslategray;
+  height: 75px;
+}
+
+h1 {
+  vertical-align: middle;
+  margin: 50px;
+}
