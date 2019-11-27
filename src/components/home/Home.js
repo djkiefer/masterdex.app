@@ -2,39 +2,39 @@ import React from "react";
 import "./Home.css";
 
 class Home extends React.Component {
-  state = {
-    pokemon: ""
-  };
+  constructor() {
+    super();
+    this.state = {
+      pokemon: "",
+      spriteUrl: ""
+    };
+  }
 
-  componentDidMount() {
+  componentDidMount = () => {
     const Pokedex = require("pokeapi-js-wrapper");
     const P = new Pokedex.Pokedex();
+    const random = Math.floor(Math.random() * 808);
 
-    P.getPokemonByName("1").then(function(response) {
-      console.log(response);
-      // this.setState({
-      //   pokemon: response.name
-      // });
+    P.getPokemonByName(random).then(response => {
+      this.setState({
+        pokemon: response.species.name,
+        spriteUrl: response.sprites.front_default
+      });
     });
-  }
+  };
 
   render() {
     return (
-      <div class="container">
-        <div class="row">
-          <div class="md-3">
-            <img src="" alt="" />
-            <br />
-            {this.state.pokemon}
-          </div>
-          <div class="md-3">
-            <div class="jumbotron text-left">
-              <h1>Coming soon!</h1>
-              <p>
-                A web app to quickly look up useful information about a pokemon
-                to help you complete your dex!
-              </p>
-            </div>
+      <div className="container">
+        <div className="jumbotron pb-1">
+          <h1>Coming soon!</h1>A web app to quickly look up useful information
+          about a pokemon to help you complete your dex!
+          <div className="row align-items-end pt-3">
+            <img
+              className="mx-auto d-block"
+              src={this.state.spriteUrl}
+              alt={this.state.pokemon}
+            />
           </div>
         </div>
       </div>
